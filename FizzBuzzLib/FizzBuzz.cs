@@ -50,7 +50,7 @@ namespace FizzBuzzLib
         /// <param name="value">The value.</param>
         /// <param name="divider">The divider.</param>
         /// <returns>True if the value is a multiple from the divider, false if not.</returns>
-        private bool IsValueMultipleFromDivider(int value, int divider)
+        public bool IsValueMultipleFromDivider(int value, int divider)
         {
             return 0 == value % divider;
         }
