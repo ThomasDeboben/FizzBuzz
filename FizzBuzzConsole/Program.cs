@@ -1,14 +1,24 @@
-﻿namespace FizzBuzzConsole
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Program.cs" company="R&S">
+// Copyright 2014  
+// </copyright>
+// <summary>
+// The fizzbuzz console program.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-    class Program
+namespace FizzBuzzConsole
+{
+    /// <summary>
+    /// The program.
+    /// </summary>
+    public class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// The main method.
+        /// </summary>
+        /// <param name="args">The args.</param>
+        public static void Main(string[] args)
         {
         }
     }
