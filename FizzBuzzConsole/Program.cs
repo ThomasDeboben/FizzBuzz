@@ -9,6 +9,9 @@
 
 namespace FizzBuzzConsole
 {
+    using System;
+    using FizzBuzzLib;
+
     /// <summary>
     /// The program.
     /// </summary>
@@ -20,6 +23,12 @@ namespace FizzBuzzConsole
         /// <param name="args">The args.</param>
         public static void Main(string[] args)
         {
+            var fizzbuzz = new FizzBuzz();
+
+            for (int i = 1; i <= 100; i++)
+            {
+                Console.WriteLine(fizzbuzz.GetFizzBuzzFormattedString(i));
+            }
         }
     }
 }
