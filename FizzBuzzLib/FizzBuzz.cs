@@ -23,8 +23,8 @@ namespace FizzBuzzLib
         {
             var result = string.Empty;
 
-            var fizz = this.IsValueMultipleFromDivider(value, 3);
-            var buzz = this.IsValueMultipleFromDivider(value, 5);
+            var fizz = this.IsValueMultipleFromDivider(value, 3) || this.ValueContainsDigit(value, 3);
+            var buzz = this.IsValueMultipleFromDivider(value, 5) || this.ValueContainsDigit(value, 5);
 
             if (fizz)
             {
@@ -53,6 +53,17 @@ namespace FizzBuzzLib
         public bool IsValueMultipleFromDivider(int value, int divider)
         {
             return 0 == value % divider;
+        }
+
+        /// <summary>
+        /// Checks if the value contains the digit.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="digit">The digit.</param>
+        /// <returns>True if the value contains the digit, false if not.</returns>
+        private bool ValueContainsDigit(int value, int digit)
+        {
+            return value.ToString().Contains(digit.ToString());
         }
     }
 }
