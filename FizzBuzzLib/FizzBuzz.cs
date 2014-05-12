@@ -61,7 +61,7 @@ namespace FizzBuzzLib
         /// <param name="value">The value.</param>
         /// <param name="digit">The digit.</param>
         /// <returns>True if the value contains the digit, false if not.</returns>
-        private bool ValueContainsDigit(int value, int digit)
+        public bool ValueContainsDigit(int value, int digit)
         {
             return value.ToString().Contains(digit.ToString());
         }
