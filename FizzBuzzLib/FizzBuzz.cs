@@ -9,6 +9,8 @@
 
 namespace FizzBuzzLib
 {
+    using System.Globalization;
+
     /// <summary>
     /// The fizz buzz class.
     /// </summary>
@@ -63,7 +65,7 @@ namespace FizzBuzzLib
         /// <returns>True if the value contains the digit, false if not.</returns>
         public bool ValueContainsDigit(int value, int digit)
         {
-            return value.ToString().Contains(digit.ToString());
+            return value.ToString(CultureInfo.InvariantCulture).Contains(digit.ToString(CultureInfo.InvariantCulture));
         }
     }
 }
