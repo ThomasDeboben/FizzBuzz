@@ -9,7 +9,10 @@
 
 namespace FizzBuzzLib
 {
+    using System;
+    using System.Collections.Generic;
     using System.Globalization;
+    using System.Linq;
 
     /// <summary>
     /// The fizz buzz class.
@@ -17,33 +20,79 @@ namespace FizzBuzzLib
     public class FizzBuzz
     {
         /// <summary>
+        /// The rules.
+        /// </summary>
+        private readonly IList<Func<int, string, string>> rules = new List<Func<int, string, string>>();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FizzBuzz"/> class.
+        /// </summary>
+        public FizzBuzz()
+        {
+            this.rules.Add(this.Fizzy);
+            this.rules.Add(this.Buzzy);
+            this.rules.Add(this.Other);
+        }
+
+        /// <summary>
         /// Get the fizz buzz formatted value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The fizz buzz formatted value<see cref="string"/>.</returns>
         public string GetFizzBuzzFormattedString(int value)
         {
-            var result = string.Empty;
+            return this.rules.Aggregate(string.Empty, (current, rule) => rule(value, current));
+        }
 
-            var fizz = this.IsValueMultipleFromDivider(value, 3) || this.ValueContainsDigit(value, 3);
-            var buzz = this.IsValueMultipleFromDivider(value, 5) || this.ValueContainsDigit(value, 5);
-
-            if (fizz)
+        /// <summary>
+        /// The fizzy rule.
+        /// Add fizz to the return string if the value is a multiple from 3 or contains a 3.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="returnString">The input return string.</param>
+        /// <returns>The return string.</returns>
+        public string Fizzy(int value, string returnString)
+        {
+            if (this.IsValueMultipleFromDivider(value, 3) || this.ValueContainsDigit(value, 3))
             {
-                result = string.Concat(result, "Fizz");
+                returnString += "Fizz";
             }
 
-            if (buzz)
+            return returnString;
+        }
+
+        /// <summary>
+        /// The buzzy rule.
+        /// Add buzz to the return string if the value is a multiple from 5 or contains a 5.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="returnString">The input return string.</param>
+        /// <returns>The return string.</returns>
+        public string Buzzy(int value, string returnString)
+        {
+            if (this.IsValueMultipleFromDivider(value, 5) || this.ValueContainsDigit(value, 5))
             {
-                result = string.Concat(result, "Buzz");
+                returnString += "Buzz";
             }
 
-            if (string.IsNullOrEmpty(result))
+            return returnString;
+        }
+
+        /// <summary>
+        /// The other rule.
+        /// Format the value as return string if no other rule has set the return string before.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="returnString">The input return string.</param>
+        /// <returns>The return string.</returns>
+        public string Other(int value, string returnString)
+        {
+            if (string.IsNullOrEmpty(returnString))
             {
-                result = string.Format("{0}", value);
+                returnString = string.Format("{0}", value);
             }
 
-            return result;
+            return returnString;
         }
 
         /// <summary>

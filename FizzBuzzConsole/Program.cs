@@ -29,6 +29,8 @@ namespace FizzBuzzConsole
             {
                 Console.WriteLine(fizzbuzz.GetFizzBuzzFormattedString(i));
             }
+
+            Console.ReadLine();
         }
     }
 }
