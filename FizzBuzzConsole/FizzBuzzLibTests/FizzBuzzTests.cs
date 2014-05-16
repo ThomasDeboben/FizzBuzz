@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FizzBuzzLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-//// using MSTestHacks;
+using MSTestHacks;
 
 namespace FizzBuzzLib.Tests
 {
