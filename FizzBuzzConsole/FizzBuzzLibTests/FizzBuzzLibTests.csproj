@@ -68,6 +68,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="TestData\DataForGetFizzBuzzFormattedString.csv" />
     <None Include="TestData\DataForIsMultipleFromDivider.csv" />
     <None Include="TestData\DataForValueContainsDigit.csv" />
   </ItemGroup>

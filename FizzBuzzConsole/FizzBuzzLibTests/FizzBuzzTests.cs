@@ -26,28 +26,12 @@ namespace FizzBuzzLibTests
         /// <summary>
         /// The FizzBuzz string formatter test.
         /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="expectedResult">The expected result.</param>
-        [TestCase(1, "1")]
-        [TestCase(2, "2")]
-        [TestCase(3, "Fizz")]
-        [TestCase(4, "4")]
-        [TestCase(5, "Buzz")]
-        [TestCase(6, "Fizz")]
-        [TestCase(9, "Fizz")]
-        [TestCase(12, "Fizz")]
-        [TestCase(13, "Fizz")]
-        [TestCase(15, "FizzBuzz")]
-        [TestCase(18, "Fizz")]
-        [TestCase(34, "Fizz")]
-        [TestCase(29, "29")]
-        [TestCase(34, "Fizz")]
-        [TestCase(35, "FizzBuzz")]
-        [TestCase(51, "FizzBuzz")]
-        public void FizzBuzzTest(int value, string expectedResult)
+        /// <param name="testData">The test data.</param>
+        [Test, TestCaseSource("GetGetFizzBuzzFormattedStringTestData")]
+        public void GetFizzBuzzFormattedStringTest(GetFizzBuzzFormattedStringTestData testData)
         {
             var fizzBuzz = new FizzBuzz();
-            Assert.AreEqual(expectedResult, fizzBuzz.GetFizzBuzzFormattedString(value));
+            Assert.AreEqual(testData.ExpectedResult, fizzBuzz.GetFizzBuzzFormattedString(testData.Value));
         }
 
         /// <summary>
@@ -70,6 +54,27 @@ namespace FizzBuzzLibTests
         {
             var fizzBuzz = new FizzBuzz();
             Assert.AreEqual(testData.ExpectedResult, fizzBuzz.ValueContainsDigit(testData.Value, testData.Digit));
+        }
+
+        /// <summary>
+        /// Gets the get fizz buzz formatted string test data.
+        /// </summary>
+        /// <returns>The get fizz buzz formatted string test data.</returns>
+        private IEnumerable<GetFizzBuzzFormattedStringTestData> GetGetFizzBuzzFormattedStringTestData()
+        {
+            using (var csv = new CsvReader(@"..\..\TestData\DataForGetFizzBuzzFormattedString.csv"))
+            {
+                while (csv.Next())
+                {
+                    var result = new GetFizzBuzzFormattedStringTestData
+                    {
+                        Value = int.Parse(csv[0]),
+                        ExpectedResult = csv[1].Trim()
+                    };
+
+                    yield return result;
+                }
+            }
         }
 
         /// <summary>
@@ -113,6 +118,31 @@ namespace FizzBuzzLibTests
 
                     yield return result;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Data struct for GetFizzBuzzFormattedStringTest
+        /// </summary>
+        public struct GetFizzBuzzFormattedStringTestData
+        {
+            /// <summary>
+            /// The value
+            /// </summary>
+            public int Value;
+
+            /// <summary>
+            /// The expected result
+            /// </summary>
+            public string ExpectedResult;
+
+            /// <summary>
+            /// Returns a <see cref="System.String" /> that represents this instance.
+            /// </summary>
+            /// <returns> A <see cref="System.String" /> that represents this instance. </returns>
+            public override string ToString()
+            {
+                return string.Format("{0} => {1}", this.Value, this.ExpectedResult);
             }
         }
 
