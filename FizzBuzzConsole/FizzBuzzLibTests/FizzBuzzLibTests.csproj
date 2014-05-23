@@ -61,12 +61,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CSVReader\CSVReader.csproj">
+      <Project>{718c32a9-5238-42df-9cea-52be1d21e054}</Project>
+      <Name>CSVReader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\FizzBuzzLib\FizzBuzzLib.csproj">
       <Project>{6B4FC84B-1356-4B03-8FC3-C7746097FECD}</Project>
       <Name>FizzBuzzLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="TestData\DataForIsMultipleFromDivider.csv" />
     <None Include="TestData\DataForIsMultipleFromThreeIsTrue.csv" />
   </ItemGroup>
   <Choose>

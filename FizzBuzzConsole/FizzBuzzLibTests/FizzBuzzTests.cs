@@ -9,6 +9,11 @@
 
 namespace FizzBuzzLibTests
 {
+    using System.Collections.Generic;
+    using System.IO;
+
+    using CSVReader;
+
     using FizzBuzzLib;
     using NUnit.Framework;
 
@@ -50,26 +55,7 @@ namespace FizzBuzzLibTests
         /// <param name="value">The value.</param>
         /// <param name="divider">The divider.</param>
         /// <param name="expectedResult">The expected Result.</param>
-        [TestCase(1, 3, false)]
-        [TestCase(2, 3, false)]
-        [TestCase(3, 3, true)]
-        [TestCase(4, 3, false)]
-        [TestCase(5, 3, false)]
-        [TestCase(6, 3, true)]
-        [TestCase(9, 3, true)]
-        [TestCase(12, 3, true)]
-        [TestCase(15, 3, true)]
-        [TestCase(18, 3, true)]
-        [TestCase(1, 5, false)]
-        [TestCase(2, 5, false)]
-        [TestCase(3, 5, false)]
-        [TestCase(4, 5, false)]
-        [TestCase(5, 5, true)]
-        [TestCase(6, 5, false)]
-        [TestCase(9, 5, false)]
-        [TestCase(10, 5, true)]
-        [TestCase(15, 5, true)]
-        [TestCase(20, 5, true)]
+        [Test, TestCaseSource("GetIsValueMultipleFromDividerTestData")]
         public void IsValueMultipleFromDividerTest(int value, int divider, bool expectedResult)
         {
             var fizzBuzz = new FizzBuzz();
@@ -92,6 +78,24 @@ namespace FizzBuzzLibTests
         {
             var fizzBuzz = new FizzBuzz();
             Assert.AreEqual(expectedResult, fizzBuzz.ValueContainsDigit(value, digit));
+        }
+
+        /// <summary>
+        /// Gets the is value multiple from divider test data.
+        /// </summary>
+        /// <returns>The is value multiple from divider test data.</returns>
+        private IEnumerable<int[]> GetIsValueMultipleFromDividerTestData()
+        {
+            using (var csv = new CsvReader(@".\TestData\DataForIsMultipleFromDivider.csv"))
+            {
+                while (csv.Next())
+                {
+                    int value = int.Parse(csv[0]);
+                    int divider = int.Parse(csv[1]);
+                    int expectedResult = int.Parse(csv[2]);
+                    yield return new[] { value, divider, expectedResult };
+                }
+            }
         }
     }
 }

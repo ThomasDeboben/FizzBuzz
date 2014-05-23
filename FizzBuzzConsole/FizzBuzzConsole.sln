@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FizzBuzzLibTests", "FizzBuz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FizzBuzzWpf", "..\FizzBuzzWpf\FizzBuzzWpf.csproj", "{23D1FB3D-492E-4E84-BC3A-A6A62910C0E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSVReader", "..\CSVReader\CSVReader.csproj", "{718C32A9-5238-42DF-9CEA-52BE1D21E054}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{23D1FB3D-492E-4E84-BC3A-A6A62910C0E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23D1FB3D-492E-4E84-BC3A-A6A62910C0E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23D1FB3D-492E-4E84-BC3A-A6A62910C0E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{718C32A9-5238-42DF-9CEA-52BE1D21E054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{718C32A9-5238-42DF-9CEA-52BE1D21E054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{718C32A9-5238-42DF-9CEA-52BE1D21E054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{718C32A9-5238-42DF-9CEA-52BE1D21E054}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
