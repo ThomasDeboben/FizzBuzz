@@ -64,19 +64,12 @@ namespace FizzBuzzLibTests
         /// <summary>
         /// The does value contains a digit test.
         /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="digit">The digit.</param>
-        /// <param name="expectedResult">The expected Result.</param>
-        [TestCase(1, 3, false)]
-        [TestCase(2, 3, false)]
-        [TestCase(3, 3, true)]
-        [TestCase(13, 3, true)]
-        [TestCase(35, 3, true)]
-        [TestCase(51, 5, true)]
-        public void ValueContainsDigitTest(int value, int digit, bool expectedResult)
+        /// <param name="testData">The test data.</param>
+        [Test, TestCaseSource("GetValueContainsDigitTestData")]
+        public void ValueContainsDigitTest(ValueContainsDigitTestData testData)
         {
             var fizzBuzz = new FizzBuzz();
-            Assert.AreEqual(expectedResult, fizzBuzz.ValueContainsDigit(value, digit));
+            Assert.AreEqual(testData.ExpectedResult, fizzBuzz.ValueContainsDigit(testData.Value, testData.Digit));
         }
 
         /// <summary>
@@ -90,11 +83,33 @@ namespace FizzBuzzLibTests
                 while (csv.Next())
                 {
                     var result = new IsValueMultipleFromDividerTestData
-                                     {
-                                         Value = int.Parse(csv[0]),
-                                         Divider = int.Parse(csv[1]),
-                                         ExpectedResult = bool.Parse(csv[2])
-                                     };
+                    {
+                        Value = int.Parse(csv[0]),
+                        Divider = int.Parse(csv[1]),
+                        ExpectedResult = bool.Parse(csv[2])
+                    };
+
+                    yield return result;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the value contains digit test data.
+        /// </summary>
+        /// <returns>The value contains digit test data.</returns>
+        private IEnumerable<ValueContainsDigitTestData> GetValueContainsDigitTestData()
+        {
+            using (var csv = new CsvReader(@"..\..\TestData\DataForValueContainsDigit.csv"))
+            {
+                while (csv.Next())
+                {
+                    var result = new ValueContainsDigitTestData
+                    {
+                        Value = int.Parse(csv[0]),
+                        Digit = int.Parse(csv[1]),
+                        ExpectedResult = bool.Parse(csv[2])
+                    };
 
                     yield return result;
                 }
@@ -128,6 +143,36 @@ namespace FizzBuzzLibTests
             public override string ToString()
             {
                 return string.Format("{0} is multiple from {1} => {2}", this.Value, this.Divider, this.ExpectedResult);
+            }
+        }
+
+        /// <summary>
+        /// Data struct for ValueContainsDigitTest
+        /// </summary>
+        public struct ValueContainsDigitTestData
+        {
+            /// <summary>
+            /// The value
+            /// </summary>
+            public int Value;
+
+            /// <summary>
+            /// The digit
+            /// </summary>
+            public int Digit;
+
+            /// <summary>
+            /// The expected result
+            /// </summary>
+            public bool ExpectedResult;
+
+            /// <summary>
+            /// Returns a <see cref="System.String" /> that represents this instance.
+            /// </summary>
+            /// <returns> A <see cref="System.String" /> that represents this instance. </returns>
+            public override string ToString()
+            {
+                return string.Format("{0} contains digit {1} => {2}", this.Value, this.Digit, this.ExpectedResult);
             }
         }
     }

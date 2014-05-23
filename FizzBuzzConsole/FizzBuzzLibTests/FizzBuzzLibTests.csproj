@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="TestData\DataForIsMultipleFromDivider.csv" />
+    <None Include="TestData\DataForValueContainsDigit.csv" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
