@@ -17,11 +17,31 @@ namespace FizzBuzzLibTests
     /// </summary>
     public class FizzBuzzTests
     {
-        []
+        /// <summary>
+        /// The FizzBuzz string formatter test.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="expectedResult">The expected result.</param>
+        [TestCase(1, "1")]
+        [TestCase(2, "2")]
+        [TestCase(3, "Fizz")]
+        [TestCase(4, "4")]
+        [TestCase(5, "Buzz")]
+        [TestCase(6, "Fizz")]
+        [TestCase(9, "Fizz")]
+        [TestCase(12, "Fizz")]
+        [TestCase(13, "Fizz")]
+        [TestCase(15, "FizzBuzz")]
+        [TestCase(18, "Fizz")]
+        [TestCase(34, "Fizz")]
+        [TestCase(29, "29")]
+        [TestCase(34, "Fizz")]
+        [TestCase(35, "FizzBuzz")]
+        [TestCase(51, "FizzBuzz")]
         public void FizzBuzzTest(int value, string expectedResult)
         {
             var fizzBuzz = new FizzBuzz();
-            Assert.AreEqual(fizzBuzz.IsValueMultipleFromDivider(i, 3));
+            Assert.AreEqual(expectedResult, fizzBuzz.GetFizzBuzzFormattedString(value));
         }
 
         /// <summary>
