@@ -54,11 +54,18 @@ namespace FizzBuzzLibTests
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="divider">The divider.</param>
-        /// <param name="expectedResult">The expected Result.</param>
+        /// <param name="expected">The expected result.</param>
         [Test, TestCaseSource("GetIsValueMultipleFromDividerTestData")]
-        public void IsValueMultipleFromDividerTest(int value, int divider, bool expectedResult)
+        public void IsValueMultipleFromDividerTest(int value, int divider, int expected)
         {
+            var expectedResult = true;
             var fizzBuzz = new FizzBuzz();
+            
+            if (expected == 0)
+            {
+                expectedResult = false;
+            }
+
             Assert.AreEqual(expectedResult, fizzBuzz.IsValueMultipleFromDivider(value, divider));
         }
 
@@ -86,7 +93,7 @@ namespace FizzBuzzLibTests
         /// <returns>The is value multiple from divider test data.</returns>
         private IEnumerable<int[]> GetIsValueMultipleFromDividerTestData()
         {
-            using (var csv = new CsvReader(@".\TestData\DataForIsMultipleFromDivider.csv"))
+            using (var csv = new CsvReader(@"..\..\TestData\DataForIsMultipleFromDivider.csv"))
             {
                 while (csv.Next())
                 {
