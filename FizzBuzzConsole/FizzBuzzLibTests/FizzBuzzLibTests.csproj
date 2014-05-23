@@ -35,9 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MSTestHacks">
-      <HintPath>..\packages\MSTestHacks.2.1.0\lib\net45\MSTestHacks.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -72,7 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="TestData\DataForIsMultipleFromDivider.csv" />
-    <None Include="TestData\DataForIsMultipleFromThreeIsTrue.csv" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -11,6 +11,7 @@ namespace FizzBuzzLibTests
 {
     using System.Collections.Generic;
     using System.IO;
+    using System.Runtime.Serialization;
 
     using CSVReader;
 
@@ -52,21 +53,12 @@ namespace FizzBuzzLibTests
         /// <summary>
         /// The is value multiple from divider test.
         /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="divider">The divider.</param>
-        /// <param name="expected">The expected result.</param>
+        /// <param name="testData">The test data.</param>
         [Test, TestCaseSource("GetIsValueMultipleFromDividerTestData")]
-        public void IsValueMultipleFromDividerTest(int value, int divider, int expected)
+        public void IsValueMultipleFromDividerTest(IsValueMultipleFromDividerTestData testData)
         {
-            var expectedResult = true;
             var fizzBuzz = new FizzBuzz();
-            
-            if (expected == 0)
-            {
-                expectedResult = false;
-            }
-
-            Assert.AreEqual(expectedResult, fizzBuzz.IsValueMultipleFromDivider(value, divider));
+            Assert.AreEqual(testData.ExpectedResult, fizzBuzz.IsValueMultipleFromDivider(testData.Value, testData.Divider));
         }
 
         /// <summary>
@@ -91,17 +83,51 @@ namespace FizzBuzzLibTests
         /// Gets the is value multiple from divider test data.
         /// </summary>
         /// <returns>The is value multiple from divider test data.</returns>
-        private IEnumerable<int[]> GetIsValueMultipleFromDividerTestData()
+        private IEnumerable<IsValueMultipleFromDividerTestData> GetIsValueMultipleFromDividerTestData()
         {
             using (var csv = new CsvReader(@"..\..\TestData\DataForIsMultipleFromDivider.csv"))
             {
                 while (csv.Next())
                 {
-                    int value = int.Parse(csv[0]);
-                    int divider = int.Parse(csv[1]);
-                    int expectedResult = int.Parse(csv[2]);
-                    yield return new[] { value, divider, expectedResult };
+                    var result = new IsValueMultipleFromDividerTestData
+                                     {
+                                         Value = int.Parse(csv[0]),
+                                         Divider = int.Parse(csv[1]),
+                                         ExpectedResult = bool.Parse(csv[2])
+                                     };
+
+                    yield return result;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Data struct for IsValueMultipleFromDividerTest
+        /// </summary>
+        public struct IsValueMultipleFromDividerTestData
+        {
+            /// <summary>
+            /// The value
+            /// </summary>
+            public int Value;
+
+            /// <summary>
+            /// The divider
+            /// </summary>
+            public int Divider;
+
+            /// <summary>
+            /// The expected result
+            /// </summary>
+            public bool ExpectedResult;
+
+            /// <summary>
+            /// Returns a <see cref="System.String" /> that represents this instance.
+            /// </summary>
+            /// <returns> A <see cref="System.String" /> that represents this instance. </returns>
+            public override string ToString()
+            {
+                return string.Format("{0} is multiple from {1} => {2}", this.Value, this.Divider, this.ExpectedResult);
             }
         }
     }
